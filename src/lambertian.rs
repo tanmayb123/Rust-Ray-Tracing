@@ -7,7 +7,7 @@ use crate::{
 
 #[derive(Clone, Default)]
 pub struct Lambertian {
-	pub albedo: Vec3,
+    pub albedo: Vec3,
 }
 
 impl Lambertian {
@@ -17,10 +17,10 @@ impl Lambertian {
 }
 
 impl Material for Lambertian {
-	fn scatter(&self, _r_in: &Ray, rec: &HitRecord, attenuation: &mut Vec3, scattered: &mut Ray) -> bool {
-		let target = rec.p + rec.normal + Vec3::random_in_unit_sphere();
-		*scattered = Ray{a: rec.p, b: target - rec.p};
-		*attenuation = self.albedo;
-		true
-	}
+    fn scatter(&self, _r_in: &Ray, rec: &HitRecord, attenuation: &mut Vec3, scattered: &mut Ray) -> bool {
+        let target = rec.p + rec.normal + Vec3::random_in_unit_sphere();
+        *scattered = Ray{a: rec.p, b: target - rec.p};
+        *attenuation = self.albedo;
+        true
+    }
 }

@@ -7,10 +7,10 @@ use crate::{
 
 #[derive(Clone)]
 pub struct HitRecord {
-	pub t: f32,
-	pub p: Vec3,
-	pub normal: Vec3,
-	pub mat: MaterialType,
+    pub t: f32,
+    pub p: Vec3,
+    pub normal: Vec3,
+    pub mat: MaterialType,
 }
 
 impl HitRecord {
@@ -25,5 +25,5 @@ impl HitRecord {
 }
 
 pub trait Hitable: Clone {
-	fn hit(&self, r: &Ray, t_min: f32, t_max: f32, rec: &mut HitRecord) -> bool;
+    fn hit(&self, r: &Ray, t_min: f32, t_max: f32, rec: &mut HitRecord) -> bool;
 }
