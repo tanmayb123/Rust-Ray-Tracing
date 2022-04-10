@@ -20,7 +20,7 @@ use metal::Metal;
 use dialectric::Dialectric;
 use camera::Camera;
 
-fn color<T: Hitable>(r: &Ray, world: T, depth: i32) -> Vec3 {
+fn color<T: Hitable>(r: &Ray, world: &T, depth: i32) -> Vec3 {
     let mut rec = hitable::HitRecord::new();
     if world.hit(r, 0.001, std::f32::MAX, &mut rec) {
         let mut scattered = Ray::default();
@@ -86,7 +86,7 @@ fn random_scene() -> HitableList<Sphere> {
 
 fn main() {
     let nx = 200;
-    let ny = 100;
+    let ny = 200;
     let ns = 100;
 
     println!("P3\n{} {}\n255", nx, ny);
@@ -106,7 +106,7 @@ fn main() {
                 let u = (i as f32 + rand::random::<f32>()) / nx as f32;
                 let v = (j as f32 + rand::random::<f32>()) / ny as f32;
                 let r = cam.get_ray(u, v);
-                col = col + color(&r, world.clone(), 0);
+                col = col + color(&r, &world, 0);
             }
             col = col / ns as f32;
             col = Vec3::new(col.x().sqrt(), col.y().sqrt(), col.z().sqrt());
